@@ -1,2 +1,27 @@
 heat_template_version: "2018-08-31"
 description: "create template to automation project configuration and start services automatically"
+
+resources:
+  net1:
+    type: OS::Neutron::Net
+    properties:
+      admin_state_up: true
+      name: auth-app
+  net1_subnet:
+    type: OS::Neutron::Subnet
+    properties:
+      network: { get_resource: net1 }
+      cidr: "192.168.65.0/26"
+      dns_nameservers: ["8.8.8.8"]
+      gateway_ip: "192.168.65.1"
+      ip_version: 4
+  router1:
+    type: OS::Neutron::Router
+    properties:
+      external_gateway_info: { network: public }
+      name: cloud-app
+  router1_interface1:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: router1 }
+      subnet_id: { get_resource: net1_subnet }
