@@ -37,5 +37,13 @@ resources:
       network_id: { get_resource: network }
       fixed_ips:
         - subnet_id: { get_resource: network_subnet }
+  instance1:
+    type: OS::Nova::Server
+    properties:
+      name: instance1
+      image: { get_param: image_id }
+      flavor: Custom_falvor1
+      networks:
+        - port: { get_resource: port1}      
         
   
