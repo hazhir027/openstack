@@ -37,4 +37,5 @@ resources:
       network_id: { get_resource: network }
       fixed_ips:
         - subnet_id: { get_resource: network_subnet }
+        
   
