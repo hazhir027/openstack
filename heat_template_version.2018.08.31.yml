@@ -98,6 +98,24 @@ resources:
       network_id: { get_resource: network }
       fixed_ips:
         - subnet_id: { get_resource: network_subnet } 
+        
+  port3:
+    type: OS::Neutron::Port
+    properties:
+      security_groups: [{ get_resource: security_group_mongodb }]
+      network_id: { get_resource: network }
+      fixed_ips:
+        - ip_address: "192.168.65.34"    
+        
+  instance_mongo:
+    type: OS::Nova::Server
+    properties:
+      name: instance-mongoDB
+      image: { get_param: image_id }
+      flavor: { get_param: db-flavor-name }
+      networks:
+        - port: { get_resource: port3 }
+       
   
   instance1:
     type: OS::Nova::Server
@@ -119,3 +137,4 @@ resources:
         
         
         
+33
