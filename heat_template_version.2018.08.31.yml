@@ -60,7 +60,7 @@ resources:
       networks:
         - port: { get_resource: port1}   
         
-   instance2:
+  instance2:
     type: OS::Nova::Server
     properties:
       name: instance2
@@ -70,26 +70,46 @@ resources:
         - port: { get_resource: port2}      
         
         
-   security_group_mongodb:
-     type: OS::Neutron::SecurityGroup
-     properties:
-       description: 'related to mongodb,for port 27017,SSH,HTTP'
-       name: security-group-mongodb
-       rules:
-       - direction: egress
-         ethertype: IPv4
-         remote_ip_prefix: 0.0.0.0/0
-       - direction: ingress
-         protocol: icmp
-       - direction: ingress
-         ethertype: IPv4
-         port_range_max: 27017
-         port_range_min: 27017
-         protocol: tcp
-       - direction: ingress
-         ethertype: IPv4
-         port_range_max: 22
-         port_range_min: 22
-         protocol: tcp
-     
-  
+  security_group_mongodb:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      description: 'related to mongodb,for port 27017,SSH,HTTP'
+      name: security-group-mongodb
+      rules:
+      - direction: egress
+        ethertype: IPv4
+        remote_ip_prefix: 0.0.0.0/0
+      - direction: ingress
+        protocol: icmp
+      - direction: ingress
+        ethertype: IPv4
+        port_range_max: 27017
+        port_range_min: 27017
+        protocol: tcp
+      - direction: ingress
+        ethertype: IPv4
+        port_range_max: 22
+        port_range_min: 22
+        protocol: tcp
+         
+  security_group_app:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      description: 'for ICMP,HTTP,SSH'
+      name: security-group-app
+      rules:
+      - direction: egress
+        ethertype: IPv4
+        remote_ip_prefix: 0.0.0.0/0
+      - direction: ingress
+        protocol: icmp
+      - direction: ingress
+        ethertype: IPv4
+        port_range_max: 80
+        port_range_min: 80
+        protocol: tcp
+      - direction: ingress
+        ethertype: IPv4
+        port_range_max: 22
+        port_range_min: 22
+        protocol: tcp  
