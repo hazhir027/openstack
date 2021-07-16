@@ -1,6 +1,20 @@
 heat_template_version: "2018-08-31"
 description: "create template to automation project configuration and start services automatically"
 
+parameters:
+  image_id:
+    type: string
+    description: base image name
+    default: "Ubuntu-20.04"
+  app-flavor-name:
+    type: string
+    description: flavor name or id for apps
+    default: "Custom_falvor1"
+  db-flavor-name:
+    type: string
+    description: flavor name or id for mongodb
+    default: "Custom_falvor2"
+
 resources:
   network:
     type: OS::Neutron::Net
