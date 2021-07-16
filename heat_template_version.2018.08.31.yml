@@ -1,0 +1,2 @@
+heat_template_version: "2018-08-31"
+description: "create template to automation project configuration and start services automatically"
