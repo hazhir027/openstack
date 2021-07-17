@@ -173,6 +173,20 @@ resources:
       name: "lb_pool"
       protocol: HTTP        
         
-        
+  monitor:
+    type: OS::Octavia::HealthMonitor
+    properties:
+      pool: { get_resource: pool }
+      type: PING
+      delay: 15
+      max_retries: 20
+      timeout: 20
+
+
+
+
+
+
+
         
         
