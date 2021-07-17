@@ -146,11 +146,17 @@ resources:
       fixed_ips:
         - subnet_id: { get_resource: network_subnet }     
         
-  lb_floating_ip:
+  floating_ip_lb:
     type: OS::Neutron::FloatingIP
     properties:
       floating_network: public
-      port_id: { get_resource: lb_port }        
+      port_id: { get_resource: lb_port }    
+      
+  pool_lb:
+    type: OS::Neutron::FloatingIPAssociation
+    properties:
+      floatingip_id: { get_resource: floating_ip_lb }
+      port_id: { get_resource: lb_port }      
         
         
 
