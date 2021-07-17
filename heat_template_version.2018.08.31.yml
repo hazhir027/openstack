@@ -188,7 +188,7 @@ resources:
       pool: { get_resource: pool }
       type: PING
       delay: 15
-      max_retries: 20
+      max_retries: 10
       timeout: 20
 
 
