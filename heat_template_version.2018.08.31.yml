@@ -158,9 +158,20 @@ resources:
       floatingip_id: { get_resource: floating_ip_lb }
       port_id: { get_resource: lb_port }      
         
-        
+  LBaaS:
+    type: OS::Octavia::LoadBalancer
+    properties:
+      name: "load-balancer"
+      vip_subnet: { get_resource: network_subnet }        
 
-        
+  pool:
+    type: OS::Octavia::Pool
+    properties:
+      admin_state_up: true
+      lb_algorithm: ROUND_ROBIN
+      loadbalancer: { get_resource: LBaaS }
+      name: "lb_pool"
+      protocol: HTTP        
         
         
         
