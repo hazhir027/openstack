@@ -138,6 +138,14 @@ resources:
         - port: { get_resource: port2}        
         
         
+  lb_port:
+    type: OS::Neutron::Port
+    properties:
+      security_groups: [{ get_resource: security_group_app }]
+      network_id: { get_resource: network }
+      fixed_ips:
+        - subnet_id: { get_resource: network_subnet }        
+        
         
 
         
