@@ -114,7 +114,13 @@ resources:
       network_id: { get_resource: network }
       fixed_ips:
         - ip_address: "192.168.65.36"    
-        
+ 
+  instance1_floating_ip:
+    type: OS::Neutron::FloatingIP
+    properties:
+      floating_network: public
+      port_id: { get_resource: port1 }    
+ 
   instance_mongo:
     type: OS::Nova::Server
     properties:
