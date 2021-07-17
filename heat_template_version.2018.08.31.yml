@@ -217,18 +217,7 @@ resources:
       subnet: { get_resource: network_subnet }
       weight: 1
 
-  LBaaS_port:
-    type: OS::Neutron::Port
-    properties:
-      network_id: { get_resource: network }
-      fixed_ips:
-        - subnet_id: { get_resource: network_subnet }
-
-  LBaaS_floating_ip:
-    type: OS::Neutron::FloatingIP
-    properties:
-      floating_network: public
-      port_id: { get_resource: LBaaS_port }
+ 
       
       
 
