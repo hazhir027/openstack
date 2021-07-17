@@ -16,10 +16,13 @@ parameters:
     type: string
     description: flavor name or id for apps
     default: "Custom_falvor1"
+
   db-flavor-name:
     type: string
     description: flavor name or id for mongodb
     default: "Custom_falvor2"
+
+
 
 resources:
   network:
@@ -39,7 +42,7 @@ resources:
     type: OS::Neutron::Router
     properties:
       external_gateway_info: { network: public }
-      name: cloud-app
+      name: cloud-router
   router_interface:
     type: OS::Neutron::RouterInterface
     properties:
@@ -99,6 +102,7 @@ resources:
       security_groups: [{ get_resource: security_group_app }]
       fixed_ips:
         - ip_address: "192.168.65.34"
+
   port2:
     type: OS::Neutron::Port
     properties:
@@ -115,11 +119,6 @@ resources:
       fixed_ips:
         - ip_address: "192.168.65.36"    
  
-  instance1_floating_ip:
-    type: OS::Neutron::FloatingIP
-    properties:
-      floating_network: public
-      port_id: { get_resource: port1 }    
  
   instance_mongo:
     type: OS::Nova::Server
