@@ -183,6 +183,25 @@ resources:
       timeout: 20
 
 
+  pool_instance1:
+    type: OS::Octavia::PoolMember
+    properties:
+      address: "192.168.65.34"
+      admin_state_up: true
+      pool: { get_resource: pool }
+      protocol_port: 80
+      subnet: { get_resource: network_subnet }
+      weight: 1
+
+  pool_instance2:
+    type: OS::Octavia::PoolMember
+    properties:
+      address: "192.168.65.35"
+      admin_state_up: true
+      pool: { get_resource: pool }
+      protocol_port: 80
+      subnet: { get_resource: network_subnet }
+      weight: 1
 
 
 
